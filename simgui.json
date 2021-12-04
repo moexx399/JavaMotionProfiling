@@ -21,8 +21,8 @@
     "windows": {
       "/SmartDashboard/Field": {
         "bottom": 514,
-        "height": 6.857999801635742,
-        "image": "C:\\Users\\brand\\Desktop\\JavaDemo\\BrandonMotion-Imported\\2020-field.png",
+        "height": 8.210550308227539,
+        "image": "C:\\Users\\brand\\Desktop\\2021Jumpstart\\BrandonMotion-Imported\\2020-field.png",
         "left": 96,
         "right": 1040,
         "top": 25,
@@ -33,7 +33,7 @@
           "style": "Track",
           "weight": 0.0
         },
-        "width": 15.239999771118164,
+        "width": 15.982950210571289,
         "window": {
           "visible": true
         }

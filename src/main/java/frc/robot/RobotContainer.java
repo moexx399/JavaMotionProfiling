@@ -93,26 +93,26 @@ public class RobotContainer {
             .addConstraint(autoVoltageConstraint);
 
     /// Pathwaever ////////////////////////////////
-    File trajectoryJSON = new File(
-      Filesystem.getDeployDirectory().toPath().resolve(
-        "paths/output/Autos/"+SmartDashboard.getString("Auto Selector", "Do Nothing"))
-        .toString()
-    );
     Trajectory trajectory = new Trajectory();
-       try {
-        Scanner myReader = new Scanner(trajectoryJSON);
-        while (myReader.hasNextLine()) {
-          String data = myReader.nextLine();
-          Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve("paths/output/" + data.substring(0, data.length() - 5)+".wpilib.json");
-          Trajectory temp_trajectory = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
-          trajectory = trajectory.concatenate(temp_trajectory);
-         }
-         myReader.close();
-          Field2d m_fieldSim = (Field2d) SmartDashboard.getData("Field");
-          m_fieldSim.getObject("traj").setTrajectory(trajectory);
-        } catch (IOException ex) {
-          DriverStation.reportError("Unable to open trajectory: " + trajectoryJSON, ex.getStackTrace());
+    try {
+      File trajectoryJSON = new File(
+        Filesystem.getDeployDirectory().toPath().resolve(
+          "paths/output/Autos/"+SmartDashboard.getString("Auto Selector", "Do Nothing"))
+          .toString()
+      );
+      Scanner myReader = new Scanner(trajectoryJSON);
+      while (myReader.hasNextLine()) {
+        String data = myReader.nextLine();
+        Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve("paths/output/" + data.substring(0, data.length() - 5)+".wpilib.json");
+        Trajectory temp_trajectory = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
+        trajectory = trajectory.concatenate(temp_trajectory);
         }
+        myReader.close();
+        Field2d m_fieldSim = (Field2d) SmartDashboard.getData("Field");
+        m_fieldSim.getObject("traj").setTrajectory(trajectory);
+    } catch (IOException ex) {
+      DriverStation.reportError("Unable to open trajectory: " + SmartDashboard.getString("Auto Selector", "Do Nothing"), ex.getStackTrace());
+    }
     /////////////////////////////////////
 
     /// Pathplanner ////////////////////
